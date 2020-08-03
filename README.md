@@ -4,4 +4,4 @@
 
 It is recommended to copy the part between `<copy>` and `</copy>`
 
-## If you are looking at the code come across any mistake please send a PR!
+## If you are looking at the code and you come across any mistake please comment or send a PR!
