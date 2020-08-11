@@ -1,0 +1,7 @@
+{
+	"CP Template": {
+		"prefix": "bits",
+		"body": "#include <bits/stdc++.h>\nusing namespace std;\n#define M_PI 3.14159265358979323846\n#define MOD 1000000007\ntypedef long long ll;\ntypedef vector<int> vint;\ntypedef vector<vint> vvint;\ntypedef vector<ll> vll;\ntypedef vector<vll> vvll;\ntypedef pair<int, int> ipair;\ntypedef pair<ll, ll> llpair;\n\n$1\n\nint main(){\n\t#ifndef ONLINE_JUDGE\n\t\tfreopen(\"input.txt\", \"r\", stdin);\n\t\tfreopen(\"output.txt\", \"w\", stdout);\n\t#endif\n\tios_base::sync_with_stdio(false);\n\tcin.tie(NULL), cout.tie(NULL);\n\t$0\n\treturn 0;\n}",
+		"description": "CPP template for competitve coding"
+	}
+}
