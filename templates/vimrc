@@ -1,63 +1,37 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
+
+" editor settings
 set nu
-set clipboard=unnamedplus
-set mouse=a
 set tabstop=4
 set autoindent
+set clipboard=unnamedplus
+set mouse=a
+set smarttab
 set shiftwidth=4
 set softtabstop=4
-set smarttab
-set expandtab
 set smartcase
 
-map <C-n> :NERDTreeToggle<CR>
+" mappings
+nmap <leader>y ggVG"+y''
 
-autocmd filetype cpp nnoremap <F5> :<C-U>!g++ -O2 -DLOCAL -std=c++17 -Wall -Wextra -Wno-unused-result -static %:r.cpp -o %:r<CR>
+" templates
+:autocmd BufNewFile *.c 0r ~/.vim/templates/c-template.c
+:autocmd BufNewFile *.cpp 0r ~/.vim/templates/cpp-template.cpp
+:autocmd BufNewFile *.java 0r ~/.vim/templates/java-template.java
+:autocmd BufNewFile *.py 0r ~/.vim/templates/py-template.py
+:autocmd BufNewFile *.sh 0r ~/.vim/templates/sh-template.sh
+
+" compilation and run key bindings
+autocmd filetype cpp nnoremap <F5> :<C-U>!g++ -O2 -DLOCAL -std=c++17 -Wshadow -Wall -Wextra -Wno-unused-result -static %:r.cpp -o %:r<CR>
+autocmd filetype cpp nnoremap <F6> :<C-U>!g++ -std=c++17 -Wshadow -Wall -o -g -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG %:r.cpp -o %:r<CR>
 autocmd filetype cpp nnoremap <F9> :<C-U>!./%:r<CR>
 autocmd filetype python nnoremap <F5> :w <bar> !python3 % <CR>
-autocmd filetype java nnoremap <buffer> <F5> :exec '!javac' shellescape(expand('%'), 1)<cr> 
-autocmd filetype java nnoremap <buffer> <F9> :exec '!java Main'<cr>
+autocmd filetype java nnoremap <F5> :<C-U>!javac %:r.java<CR>
+autocmd filetype java nnoremap <F9> :exec '!java Main'<cr>
+autocmd filetype sh nnoremap <F9> :<C-U>!bash %:r.sh<CR>
+autocmd filetype javascript nnoremap <F9> :<C-U>!node %:r.js<CR>
 
-:autocmd BufNewFile *.cpp 0r ~/.vim/templates/cpp-template.cpp
-:autocmd BufNewFile *.py 0r ~/.vim/templates/py-template.py
-:autocmd BufNewFile *.java 0r ~/.vim/templates/java-template.java
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1 
-
-set hlsearch
-hi Search ctermbg=Yellow
-hi Search ctermfg=Red
-hi MatchParen cterm=none ctermbg=green ctermfg=blue
-hi SpellBad ctermfg=196 ctermbg=226 guifg=#ffff00 guibg=#ff0000
-hi SpellCap ctermfg=196 ctermbg=226 guifg=#ffff00 guibg=#ff0000
-
-let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
-if executable(s:clip)
-    augroup WSLYank
-        autocmd!
-        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-    augroup END
-endif
-
-let g:ycm_allow_changing_updatetime=0
-
-set completeopt-=preview
-
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDAltDelims_java = 1
-let g:NERDCommentEmptyLines = 1
-let g:NERDTrimTrailingWhitespace = 1
-let g:NERDToggleCheckAllLines = 1
-
-set pastetoggle=<F2>
+" nerd tree
+map <C-n> :NERDTreeToggle<CR>
