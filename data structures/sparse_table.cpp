@@ -42,8 +42,16 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
     Created: 19 Oct 2020 19:43:52
 */
 
+// Time complexity:
+// Building O(Nlog(N))
+// slowQuery O(log(N))
+// fastQuery O(1)
+// Space Complexity O(Nlog(N)) ~ O(25*N) 
+
 const int MAXN = 1e6+1, K = 25;
 int n, a[MAXN], st[MAXN][K + 1];
+
+//-----------------<copy>------------------
 
 // change definition accordingly
 int func(int x, int y){
@@ -75,17 +83,11 @@ int fastQuery(int l, int r){
     return func(st[l][j], st[r - (1 << j) + 1][j]);
 }
 
+//--------------</copy>---------------
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL), cout.tie(NULL);
-    a[0] = 1;
-    a[1] = 2;
-    a[2] = 3;
-    a[3] = 4;
-    a[4] = 5;
-    n = 5;
-    buildSparseTable();
-    cout<<slowQuery(1, 3)<<"\n";
-    cout<<fastQuery(1, 3)<<"\n";
+    
     return 0;
 }
