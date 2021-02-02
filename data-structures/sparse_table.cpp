@@ -3,8 +3,7 @@ using namespace std;
 
 // Time complexity:
 // Building O(Nlog(N))
-// slowQuery O(log(N))
-// fastQuery O(1)
+// Query O(1)
 // Space Complexity O(Nlog(N)) ~ O(25*N) 
 
 //-----------------<copy>------------------
