@@ -15,7 +15,8 @@ Plugin 'valloric/youcompleteme'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'morhetz/gruvbox'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,6 +52,7 @@ set ttimeoutlen=5
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set shiftwidth=4
+set cursorline
 
 " key bindings
 execute "set <A-k>=\ek"
@@ -86,13 +88,16 @@ autocmd filetype javascript nnoremap <F9> :<C-U>!node %:r.js<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " youcompleteme settings
-let g:ycm_show_diagnostics_ui = 0
+" let g:ycm_show_diagnostics_ui = 0
 set completeopt-=preview
 nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " airline settings
-let g:airline_theme = 'minimalist'
+" let g:airline_theme = 'minimalist'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+
+" gruvbox settings
+colorscheme gruvbox
