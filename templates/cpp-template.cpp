@@ -2,6 +2,8 @@
 using namespace std;
 #define M_PI 3.14159265358979323846
 #define MOD 1000000007
+#define sz(x) (int)x.size()
+#define all(x) x.begin(), x.end()
 typedef long long ll;
 typedef vector<int> vint;
 typedef vector<vint> vvint;
