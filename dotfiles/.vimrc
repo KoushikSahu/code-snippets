@@ -13,10 +13,18 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'valloric/youcompleteme'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 " Plugin 'vim-airline/vim-airline-themes'
 Plugin 'morhetz/gruvbox'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'scrooloose/syntastic'
+Plugin 'honza/vim-snippets'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,6 +48,7 @@ let mapleader=" "
 " editor settings
 syntax on
 set number 
+set relativenumber
 set tabstop=4
 set mouse=a
 set ruler
@@ -53,8 +62,10 @@ set backspace=indent,eol,start
 set clipboard=unnamedplus
 set shiftwidth=4
 set cursorline
+set expandtab
+set hlsearch
 
-" key bindings
+" keybindings
 execute "set <A-k>=\ek"
 execute "set <A-j>=\ej"
 nmap <leader>y ggvGy
@@ -69,6 +80,7 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 imap <C-H> <C-W>
+nnoremap <C-P> :Files <CR>
 
 " templates
 autocmd BufNewFile *.cpp 0r ~/.templates/cpp-template.cpp
@@ -101,3 +113,14 @@ let g:airline_powerline_fonts = 1
 
 " gruvbox settings
 colorscheme gruvbox
+
+" syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
