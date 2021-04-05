@@ -39,10 +39,10 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-//returns value of x^y
+//-------------------------<copy>-----------------------
 template <typename T>
 T pow_binexpo(T x, int y){
-    T ans = 1;
+    T ans = 1; 
     while(y){
         if(y%2) ans *= x;
         x *= x;
@@ -51,10 +51,21 @@ T pow_binexpo(T x, int y){
     return ans;
 }
 
+template <typename T>
+T pow_matexpo(T x, int y){
+    assert(x.n == x.m);
+    T ans = T(x.n, x.m, true);
+    while(y){
+        if(y%2) ans = ans*x;
+        x = x*x;
+        y /= 2;
+    }
+    return ans;
+}
+//-------------------------</copy>-----------------------
+
 int main(){
-    // usage and unit tests
-    ll ans = pow_binexpo<ll>(2021, 5);
-    cout<<ans<<"\n";
+
     return 0;
 }
 
