@@ -1,50 +1,84 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define M_PI 3.14159265358979323846
-#define MOD 1000000007
-typedef long long ll;
-typedef vector<int> vint;
-typedef vector<vint> vvint;
-typedef vector<ll> vll;
-typedef vector<vll> vvll;
-typedef pair<int, int> ipair;
-typedef pair<ll, ll> llpair;
 
 // ----------------- <copy> ---------------
-// constructor takes in number of row, columns and if the matrix is identity matrix
-struct Matrix{
-    int n, m, a[101][101];
-
-    Matrix(int n, int m, bool identity=false) : n(n), m(m){
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                a[i][j] = 0;
-            }
+template <typename T>
+class Row{
+    public:
+        Row(){ }
+        
+        Row(int len) : n(len){
+            assert(len>0);
+            a = new int[len];
+            for(int i=0; i<len; i++) a[i] = 0;
         }
-        if(identity){
-            for(int i=0; i<n; i++) a[i][i] = 1;
-        }
-    }
 
-    Matrix operator*(Matrix b){
-        Matrix product(n, b.m);
-        assert(m==b.n);
-        for(int i=0; i<n; i++){
-            for(int j=0; j<b.m; j++){
-                for(int k=0; k<m; k++){
-                    product.a[i][j] += (a[i][k]*b.a[k][j]);
+        T& operator[](int idx){
+            assert(idx>=0 && idx<n);
+            return a[idx];
+        }
+        
+    private:
+        T* a;
+        int n;
+
+};
+
+template <typename T>
+class Matrix{
+    public:
+        int n, m;
+
+        Matrix(int row, int col, bool identity=false) : n(row), m(col){
+            if(identity) assert(row == col);
+            a = new Row<T>[row];
+            for(int i=0; i<row; i++) a[i] = Row<T>(col);
+            if(identity) for(int i=0; i<row; i++) a[i][i] = 1;
+        }
+
+        Row<T>& operator[](int idx){
+            return a[idx];
+        }
+
+        Matrix operator*(Matrix b){
+            assert(m == b.n);
+            Matrix<T> product(n, b.m);
+            for(int i=0; i<n; i++){
+                for(int j=0; j<b.m; j++){
+                    for(int k=0; k<m; k++){
+                        product[i][j] += (a[i][k]*b[k][j]);
+                    }
                 }
             }
+            return product;
         }
-        return product;
-    }
+
+        void show(){
+            for(int i=0; i<n; i++){
+                for(int j=0; j<m; j++){
+                    cout<<a[i][j]<<" ";
+                }
+                cout<<"\n";
+            }
+        }
+
+    private:
+        Row<T>* a;
+
 };
 //------------------ </copy> ------------------
 
 int main(){
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL), cout.tie(NULL);
-
+    Matrix<int> m(3, 3, true), mm(3, 3, false);
+    m.show();
+    for(int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            mm[i][j] = i+j;
+        }
+    }
+    mm.show();
+    Matrix<int> ans = m*mm;
+    ans.show();
 	return 0;
 }
 
