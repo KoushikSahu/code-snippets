@@ -9,7 +9,7 @@ class SegmentTree {
 			n = len;
 			f = func;
 			d = default_val;
-			a = new T[2*n+5];
+			a = new T[4*n+5];
 			construct_segment_tree(arr, 0, 0, n-1);
 		}
 
