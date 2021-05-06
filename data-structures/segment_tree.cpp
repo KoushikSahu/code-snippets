@@ -13,26 +13,12 @@ class SegmentTree {
 			construct_segment_tree(arr, 0, 0, n-1);
 		}
 
-
-		T query(int l, int r, int low, int high, int root){
-			if(r<low || l>high) return d; 
-			else if(l<=low && r>=high) return a[root];
-			int mid = low + (high - low) / 2;
-			T left_val = query(l, r, low, mid, 2*root+1);
-			T right_val = query(l, r, mid+1, high, 2*root+2);
-			return f(left_val, right_val);
+		T query(int left_idx, int right_idx){
+			return _query(left_idx, right_idx, 0, n-1, 0);
 		}
 
-		void update(int idx, T new_val, int low, int high, int root){
-			assert(idx>=0 && idx<n);
-			if(low==high){
-				a[root] = new_val;
-				return;
-			}
-			int mid = low + (high - low) / 2;
-			if(idx<=mid) update(idx, new_val, low, mid, 2*root+1);
-			else update(idx, new_val, mid+1, high, 2*root+2);
-			a[root] = f(a[2*root+1], a[2*root+2]);
+		void update(int idx, T val){
+			_update(idx, val, 0, n-1, 0);
 		}
 
 	private:
@@ -51,6 +37,27 @@ class SegmentTree {
 			a[root] = f(a[2*root+1], a[2*root+2]);
 		}
 
+		T _query(int l, int r, int low, int high, int root){
+			if(r<low || l>high) return d; 
+			else if(l<=low && r>=high) return a[root];
+			int mid = low + (high - low) / 2;
+			T left_val = _query(l, r, low, mid, 2*root+1);
+			T right_val = _query(l, r, mid+1, high, 2*root+2);
+			return f(left_val, right_val);
+		}
+
+		void _update(int idx, T new_val, int low, int high, int root){
+			assert(idx>=0 && idx<n);
+			if(low==high){
+				a[root] = new_val;
+				return;
+			}
+			int mid = low + (high - low) / 2;
+			if(idx<=mid) _update(idx, new_val, low, mid, 2*root+1);
+			else _update(idx, new_val, mid+1, high, 2*root+2);
+			a[root] = f(a[2*root+1], a[2*root+2]);
+		}
+
 };
 //-----------------</copy>-------------------
 
@@ -60,9 +67,9 @@ int main(){
 	double a[6] = {2.16, 3.14, 2.0, 7.68, 1.55, 6.1};
 	auto f = [](double p, double q){return p+q;};
 	SegmentTree<double> st(6, a, f, 0.0);
-	cout<<st.query(1, 3, 0, 5, 0)<<"\n";
-	st.update(3, 0, 0, 5, 0);
-	cout<<st.query(1, 3, 0, 5, 0)<<"\n";
+	cout<<st.query(1, 3)<<"\n";
+	st.update(3, 0);
+	cout<<st.query(1, 3)<<"\n";
     return 0;
 }
 
