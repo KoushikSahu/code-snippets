@@ -79,7 +79,7 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 nnoremap <C-P> :Files <CR>
-nnoremap <leader>t :term powershell<CR>
+nnoremap <leader>t :bel term powershell<CR>
 tnoremap <Esc> <C-\><C-n>:q!<CR>
 
 " templates
