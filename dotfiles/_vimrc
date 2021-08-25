@@ -21,6 +21,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'honza/vim-snippets'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'romainl/vim-cool'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -103,4 +104,7 @@ let g:airline_powerline_fonts = 1
 
 " gruvbox settings
 colorscheme gruvbox
+
+" vim-cool settings
+let g:CoolTotalMatches = 1
 
