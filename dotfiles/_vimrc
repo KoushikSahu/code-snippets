@@ -79,6 +79,8 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 nnoremap <C-P> :Files <CR>
+nnoremap <leader>t :term powershell<CR>
+tnoremap <Esc> <C-\><C-n>:q!<CR>
 
 " templates
 autocmd BufNewFile *.cpp 0r ~/.templates/cpp-template.cpp
