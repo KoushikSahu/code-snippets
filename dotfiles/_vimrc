@@ -66,6 +66,7 @@ set t_Co=256
 execute "set <A-k>=\ek"
 execute "set <A-j>=\ej"
 execute "set <c-w>=\xce\x7a"
+nmap <leader>y ggvGy
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
