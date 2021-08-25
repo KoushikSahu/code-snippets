@@ -61,7 +61,6 @@ set shiftwidth=4
 set cursorline
 set hlsearch
 set t_Co=256
-set shell=powershell
 
 " keybindings
 execute "set <A-k>=\ek"
