@@ -47,7 +47,7 @@ bindsym $mod+Return exec terminator
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb '#665c54' -sb '#282828' -fn 'monospace-7'
+bindsym $mod+d exec dmenu_run -nb '#282828' -sb '#fbf1c7' -sf '#282828' -nf '#fbf1c7' -fn 'monospace-7' 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
