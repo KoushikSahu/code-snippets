@@ -213,3 +213,7 @@ for_window [class="^.*"] border pixel 1
 # compton for transparency
 exec compton
 
+# brightness control with function keys
+bindsym XF86MonBrightnessUp exec brightnessctl -d nvidia_0 s +5%
+bindsym XF86MonBrightnessDown exec brightnessctl -d nvidia_0 s 5%-
+
