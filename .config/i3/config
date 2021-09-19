@@ -205,3 +205,7 @@ exec compton
 bindsym XF86MonBrightnessUp exec brightnessctl -d nvidia_0 s +5%
 bindsym XF86MonBrightnessDown exec brightnessctl -d nvidia_0 s 5%-
 
+# lockscreen
+# bindsym $mod+Shift+l exec i3lock -i ~/Pictures/wallpapers/gruvbox/leaves-wall.png
+bindsym $mod+Shift+l exec betterlockscreen -l blur
+

@@ -95,18 +95,18 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 ${1}
 
-void testcase(){
+void solve(){
 	${2}
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL), cout.tie(NULL);
-	int t=1;
-	//cin>>t;
-	for(int i=1; i<=t; i++){
+	int T=1;
+	//cin>>T;
+	for(int i=1; i<=T; i++){
 		cout<<"Case #"<<i<<": ";
-		testcase();
+		solve();
 	}
     return 0;
 }
@@ -157,19 +157,35 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 ${1}
 
-void testcase(){
+void solve(){
 	${2}
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL), cout.tie(NULL);
-	int t=1;
-	//cin>>t;
-	for(int i=1; i<=t; i++){
+	int T=1;
+	//cin>>T;
+	for(int i=1; i<=T; i++){
 		cout<<"Case #"<<i<<": ";
-		testcase();
+		solve();
 	}
+    return 0;
+}
+
+endsnippet
+
+snippet gen
+#include <bits/stdc++.h>
+using namespace std;
+
+int rand(int a, int b){
+    return a + rand()%(b-a+1);
+}
+
+int main(int argc, char* argv[]){
+    srand(atoi(argv[1]));
+    ${1}
     return 0;
 }
 

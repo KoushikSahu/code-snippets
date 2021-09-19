@@ -30,3 +30,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# stack size
+ulimit -s unlimited
+
+# paths
+export PATH=$PATH:$HOME/scripts
+
