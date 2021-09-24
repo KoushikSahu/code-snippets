@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# gen.cpp wrong_solution.cpp=$0 brute.cpp
-
 if [[ $# -eq 0 ]]; then
     echo "[usage] stress_test wrong_solution"
 else
@@ -10,13 +8,13 @@ else
     elif [[ ! -a brute.cpp ]]; then
         echo "[error] brute force file not present!"
     else
-        echo -ne "[processing] compiling generator...\\r\033[K"
+        echo -ne "[processing] compiling generator...\\r\e[K"
         g++ -std=c++17 gen.cpp -o gen.out
         echo -e "[\u2714] compiled generator"
-        echo -ne "[processing] compiling brute force...\\r\033[K"
+        echo -ne "[processing] compiling brute force...\\r\e[K"
         g++ -std=c++17 brute.cpp -o brute.out
         echo -e "[\u2714] compiled brute force"
-        echo -ne "[processing] compiling wrong solution...\\r\033[K"
+        echo -ne "[processing] compiling wrong solution...\\r\e[K"
         g++ -std=c++17 $1 -o sol.out
         echo -e "[\u2714] compiled wrong solution"
         for (( i = 1; ; ++i )); do
