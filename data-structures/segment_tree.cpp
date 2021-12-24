@@ -5,71 +5,54 @@ using namespace std;
 template <typename T>
 class SegmentTree {
 	public:
-		SegmentTree(int len, T* arr, T (*func)(T, T), T default_val){
-			n = len;
-			f = func;
-			d = default_val;
-			a = new T[4*n+5];
-			construct_segment_tree(arr, 0, 0, n-1);
-		}
+    SegmentTree(int len, T* arr, function<T(T, T)> func, T init) : n(len), fn(func), init(init) {
+      st.resize(2*len);
+      for(int i=len; i<2*len; i++) st[i] = arr[i-len];
+      build();
+    }
 
-		T query(int left_idx, int right_idx){
-			return _query(left_idx, right_idx, 0, n-1, 0);
-		}
+    SegmentTree(int len, vector<T> arr, function<T(T, T)> func, T init) : n(len), fn(func), init(init) {
+      st.resize(2*len);
+      for(int i=len; i<2*len; i++) st[i] = arr[i-len];
+      build();
+    }
 
-		void update(int idx, T val){
-			_update(idx, val, 0, n-1, 0);
-		}
+    void update(size_t idx, T val){
+      for(st[idx+=n]=val; idx>1; idx>>=1) st[idx>>1] = fn(st[idx], st[idx^1]);
+    }
 
-	private:
-		int n;
-		T *a, d;
-		T (*f)(T, T);
+    T query(size_t l, size_t r){
+      r++;
+      T res = init;
+      for(l+=n, r+=n; l<r; l>>=1, r>>=1){
+        if(l&1) res = fn(res, st[l++]);
+        if(r&1) res = fn(res, st[--r]);
+      }
+      return res;
+    }
 
-		void construct_segment_tree(T* arr, int root, int low, int high){
-			if(low == high){
-				a[root] = arr[low];
-				return;
-			}
-			int mid = low + (high - low) / 2;
-			construct_segment_tree(arr, 2*root+1, low, mid);
-			construct_segment_tree(arr, 2*root+2, mid+1, high);
-			a[root] = f(a[2*root+1], a[2*root+2]);
-		}
+  private:
+    size_t n;
+    T init;
+    vector<T> st;
+    function<T(T, T)> fn;
 
-		T _query(int l, int r, int low, int high, int root){
-			if(r<low || l>high) return d; 
-			else if(l<=low && r>=high) return a[root];
-			int mid = low + (high - low) / 2;
-			T left_val = _query(l, r, low, mid, 2*root+1);
-			T right_val = _query(l, r, mid+1, high, 2*root+2);
-			return f(left_val, right_val);
-		}
-
-		void _update(int idx, T new_val, int low, int high, int root){
-			assert(idx>=0 && idx<n);
-			if(low==high){
-				a[root] = new_val;
-				return;
-			}
-			int mid = low + (high - low) / 2;
-			if(idx<=mid) _update(idx, new_val, low, mid, 2*root+1);
-			else _update(idx, new_val, mid+1, high, 2*root+2);
-			a[root] = f(a[2*root+1], a[2*root+2]);
-		}
+    void build(){
+      for(int i=n-1; i>0; i--) st[i] = fn(st[i<<1], st[(i<<1)|1]);
+    }
 
 };
 //-----------------</copy>-------------------
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL), cout.tie(NULL);
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL), cout.tie(NULL);
 	double a[6] = {2.16, 3.14, 2.0, 7.68, 1.55, 6.1};
 	auto f = [](double p, double q){return p+q;};
-	SegmentTree<double> st(6, a, f, 0.0);
+	SegmentTree<double> st(6, a, f, 0);
 	cout<<st.query(1, 3)<<"\n";
 	st.update(3, 0);
 	cout<<st.query(1, 3)<<"\n";
-    return 0;
+  return 0;
 }
 
