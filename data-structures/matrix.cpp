@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define sz(x) (int)x.size()
 
 // ----------------- <copy> ---------------
 template <typename T>
@@ -9,6 +10,7 @@ class Row{
         
         Row(int len) : n(len){
             assert(len>0);
+            n = len;
             a = new int[len];
             for(int i=0; i<len; i++) a[i] = 0;
         }
@@ -16,6 +18,10 @@ class Row{
         T& operator[](int idx){
             assert(idx>=0 && idx<n);
             return a[idx];
+        }
+
+        int size(){
+          return n;
         }
         
     private:
@@ -62,6 +68,10 @@ class Matrix{
             }
         }
 
+        int size(){
+          return n;
+        }
+
     private:
         Row<T>* a;
 
@@ -70,15 +80,20 @@ class Matrix{
 
 int main(){
     Matrix<int> m(3, 3, true), mm(3, 3, false);
+    cout<<"m matrix: \n";
     m.show();
     for(int i=0; i<3; i++){
         for(int j=0; j<3; j++){
             mm[i][j] = i+j;
         }
     }
+    cout<<"mm matrix: \n";
     mm.show();
     Matrix<int> ans = m*mm;
+    cout<<"ans matrix: \n";
     ans.show();
-	return 0;
+    cout<<"ans size: \n";
+    cout<<sz(ans)<<'x'<<sz(ans[0])<<'\n';
+    return 0;
 }
 
